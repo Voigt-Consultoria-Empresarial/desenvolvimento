@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título (será atualizado via JS) -->
+    <title>Artigo do Blog - Voigt Consultoria Empresarial</title>
+
+    <!-- SEO (tags genéricas, serão complementadas pelo conteúdo do post) -->
+    <meta name="description" content="Leia o artigo completo e obtenha insights valiosos da equipe Voigt Consultoria Empresarial.">
+    <meta name="author" content="Voigt Consultoria Empresarial">
+    
+    <!-- Open Graph / Facebook (tags genéricas) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Voigt Consultoria Empresarial">
+    <meta property="og:image" content="/assets/identidade-visual/og-img-shared-vitrine-google-1080x608.png">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="608">
+
+    <!-- Twitter (tags genéricas) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/assets/identidade-visual/og-img-shared-vitrine-google-1080x608.png">
+
+    <!-- Favicons (caminhos corrigidos) -->
+    <link rel="icon" href="/assets/identidade-visual/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/assets/identidade-visual/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/identidade-visual/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/identidade-visual/site.webmanifest">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets (caminhos absolutos) -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="blog-page">
+        <div class="container" id="blogPost">
+            <!-- O conteúdo do post individual será carregado aqui pelo blog-post.js -->
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Corrigindo os caminhos para serem absolutos a partir da raiz do site -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/sdk/blog-supabase.js"></script>
+    <script src="/dadosficticios.js"></script>
+    <!-- Corrigido o caminho para refletir a nova localização da pasta -->
+    <script src="/blog-post/blog-post.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

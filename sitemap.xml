@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- A URL base deve ser substituída pela URL de produção final -->
+<url>
+  <loc>https://www.voigtconsultoria.com.br/</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.voigtconsultoria.com.br/blog/</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.voigtconsultoria.com.br/politica-de-privacidade/</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.50</priority>
+</url>
+<url>
+  <loc>https://www.voigtconsultoria.com.br/termos-de-uso/</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.50</priority>
+</url>
+
+<!-- 
+  NOTA: As URLs dos posts do blog devem ser adicionadas aqui.
+  O ideal é que este arquivo seja gerado dinamicamente no servidor
+  ou através de um script no processo de build para incluir todos os posts.
+  Exemplo:
+  <url>
+    <loc>https://www.voigtconsultoria.com.br/blog-post/#slug-do-post-1</loc>
+    <lastmod>2025-01-01</lastmod>
+    <priority>0.64</priority>
+  </url>
+-->
+</urlset>
