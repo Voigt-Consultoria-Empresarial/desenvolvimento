@@ -26,28 +26,28 @@
     <!-- Open Graph / Facebook (tags genéricas) -->
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Voigt Consultoria Empresarial">
-    <meta property="og:image" content="/assets/identidade-visual/og-img-shared-vitrine-google-1080x608.png">
+    <meta property="og:image" content="../assets/identidade-visual/og-img-shared-vitrine-google-1080x608.png">
     <meta property="og:image:width" content="1080">
     <meta property="og:image:height" content="608">
 
     <!-- Twitter (tags genéricas) -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="/assets/identidade-visual/og-img-shared-vitrine-google-1080x608.png">
+    <meta name="twitter:image" content="../assets/identidade-visual/og-img-shared-vitrine-google-1080x608.png">
 
-    <!-- Favicons (caminhos corrigidos) -->
-    <link rel="icon" href="/assets/identidade-visual/favicon.ico" sizes="32x32">
-    <link rel="icon" href="/assets/identidade-visual/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/assets/identidade-visual/apple-touch-icon.png">
-    <link rel="manifest" href="/assets/identidade-visual/site.webmanifest">
+    <!-- Favicons (caminhos relativos) -->
+    <link rel="icon" href="../assets/identidade-visual/favicon.ico" sizes="32x32">
+    <link rel="icon" href="../assets/identidade-visual/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../assets/identidade-visual/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/identidade-visual/site.webmanifest">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets (caminhos absolutos) -->
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/blog/blog.css">
+    <!-- Stylesheets (caminhos relativos) -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../blog/blog.css">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -68,7 +68,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col footer-brand">
-                    <img src="/assets/identidade-visual/logo-voigt-header-footer-889x281-fa.png" alt="Voigt Consultoria Empresarial" class="footer-logo">
+                    <img src="../assets/identidade-visual/logo-voigt-header-footer-889x281-fa.png" alt="Voigt Consultoria Empresarial" class="footer-logo">
                     <p class="footer-slogan">Sua segurança jurídica para o crescimento financeiro</p>
                     <div class="footer-social">
                         <a href="https://www.instagram.com/voigt.consultoriaempresarial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -97,21 +97,21 @@
                 <div class="footer-col">
                     <h4>Páginas</h4>
                     <ul class="footer-links">
-                        <li><a href="/#sobre">Sobre</a></li>
-                        <li><a href="/#servicos">Serviços</a></li>
-                        <li><a href="/#equipe">Equipe</a></li>
-                        <li><a href="/blog/">Blog</a></li>
-                        <li><a href="/#contato">Contato</a></li>
+                        <li><a href="../#sobre">Sobre</a></li>
+                        <li><a href="../#servicos">Serviços</a></li>
+                        <li><a href="../#equipe">Equipe</a></li>
+                        <li><a href="../blog/">Blog</a></li>
+                        <li><a href="../#contato">Contato</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Serviços</h4>
                     <ul class="footer-links">
-                        <li><a href="/#servicos">Planejamento Tributário</a></li>
-                        <li><a href="/#servicos">Consultoria Preventiva</a></li>
-                        <li><a href="/#servicos">Direito Bancário</a></li>
-                        <li><a href="/#servicos">Compliance Tributário</a></li>
+                        <li><a href="../#servicos">Planejamento Tributário</a></li>
+                        <li><a href="../#servicos">Consultoria Preventiva</a></li>
+                        <li><a href="../#servicos">Direito Bancário</a></li>
+                        <li><a href="../#servicos">Compliance Tributário</a></li>
                     </ul>
                 </div>
                 
@@ -132,12 +132,11 @@
         </div>
     </footer>
 
-    <!-- Corrigindo os caminhos para serem absolutos a partir da raiz do site -->
+    <!-- Scripts com caminhos relativos -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/sdk/blog-supabase.js"></script>
-    <script src="/dadosficticios.js"></script>
-    <!-- Corrigido o caminho para refletir a nova localização da pasta -->
-    <script src="/blog-post/blog-post.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="../sdk/blog-supabase.js"></script>
+    <script src="../dadosficticios.js"></script>
+    <script src="./blog-post.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

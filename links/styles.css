@@ -54,7 +54,7 @@ body {
   padding-bottom: 8px;
 }
 .brand__logo {
-  height: 56px;
+  height: 55px;
   width: auto;
 }
 
@@ -115,7 +115,15 @@ body {
 
   /* Increase header logo size by 6% on desktop */
   .brand__logo {
-    height: calc(56px * 1.06); /* 59.36px */
+    height: calc(55px * 1.06); /* 58.3px */
+  }
+
+  /* Align intro text to left on desktop */
+  .intro {
+    text-align: left;
+  }
+  .intro__desc {
+    margin: 0;
   }
 }
 

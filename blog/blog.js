@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     function createPostCard(post) {
         const card = document.createElement('a'); // Alterado para tag <a>
         card.className = 'blog-card';
-        // Corrigindo a URL para o formato com hash, e o caminho para a raiz
+        // Corrigindo a URL para o formato com hash, e o caminho relativo
         if (post.slug) {
-            card.href = `/blog-post/#${post.slug}`;
+            card.href = `../blog-post/#${post.slug}`;
         }
 
         // Usando o campo correto 'data_publicacao'
@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const categoryName = post.categoria && post.categoria.nome ? post.categoria.nome : 'Sem Categoria';
         
-        // Usa a URL completa se for externa, ou monta o caminho absoluto se for local
-        const imageSrc = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : `/${imageUrl}`) : null;
+        // Usa a URL completa se for externa, ou monta o caminho relativo se for local
+        const imageSrc = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : `../${imageUrl}`) : null;
         const imageHTML = imageSrc ? `<img src="${imageSrc}" alt="${post.titulo}" class="blog-image">` : '<div class="blog-image-placeholder"></div>';
 
         card.innerHTML = `

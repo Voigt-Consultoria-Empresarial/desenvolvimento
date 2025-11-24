@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const postSlug = window.location.hash.substring(1);
 
     if (!postSlug) {
-        postContainer.innerHTML = '<p>Post não encontrado. <a href="/blog/">Voltar para o blog</a>.</p>';
+        postContainer.innerHTML = '<p>Post não encontrado. <a href="../blog/">Voltar para o blog</a>.</p>';
         return;
     }
 
@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (post) {
             renderSinglePost(post);
         } else {
-            postContainer.innerHTML = '<p>Post não encontrado. <a href="/blog/">Voltar para o blog</a>.</p>';
+            postContainer.innerHTML = '<p>Post não encontrado. <a href="../blog/">Voltar para o blog</a>.</p>';
         }
     } catch (error) {
         console.error("Erro ao carregar o post:", error);
-        postContainer.innerHTML = '<p>Erro ao carregar o post. <a href="/blog/">Voltar para o blog</a>.</p>';
+        postContainer.innerHTML = '<p>Erro ao carregar o post. <a href="../blog/">Voltar para o blog</a>.</p>';
     }
 
     function renderSinglePost(post) {
@@ -41,12 +41,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const categoryName = post.categoria && post.categoria.nome ? post.categoria.nome : 'Sem Categoria';
 
-        // Usa a URL completa se for externa, ou monta o caminho absoluto se for local
-        const imageSrc = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : `/${imageUrl}`) : null;
+        // Usa a URL completa se for externa, ou monta o caminho relativo se for local
+        const imageSrc = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : `../${imageUrl}`) : null;
         const imageHTML = imageSrc ? `<img src="${imageSrc}" alt="${post.titulo}">` : '';
 
         postContainer.innerHTML = `
-            <a href="/blog/" class="back-link">
+            <a href="../blog/" class="back-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                 Voltar para o blog
             </a>
