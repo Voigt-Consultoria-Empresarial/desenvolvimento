@@ -204,27 +204,6 @@ body {
   background: #f7f9fc;
 }
 
-/* Footer */
-.footer {
-  display: flex;
-  justify-content: center;
-  padding-top: 12px;
-  margin-top: auto;
-}
-.footer small {
-  color: var(--muted);
-}
-.footer a {
-  color: var(--brand-blue);
-  font-weight: 600;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 120ms ease, color 120ms ease;
-}
-.footer a:hover {
-  border-color: var(--brand-blue);
-}
-
 /* Focus rings for accessibility */
 .btn:focus-visible,
 .iconbtn:focus-visible,
@@ -239,4 +218,164 @@ body {
   .iconbtn {
     transition: none;
   }
+}
+
+/* ==========================================================================
+   Main Site Footer Styles (Ported)
+   ========================================================================== */
+
+:root {
+    --navy: #0d2c54;
+    --gold: #c9a44c;
+    --white: #ffffff;
+    --gray: #4a4a4a;
+    --aqua: #00d4aa;
+}
+
+.footer {
+    background: var(--navy);
+    color: var(--white);
+    padding: 4rem 0 2rem;
+    display: block; /* Override any previous display settings */
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Reset container for footer specifically if needed, but main container class is reused.
+   The main .container in this file has grid display.
+   The footer html has <div class="container">. 
+   We should probably let it inherit the grid but we need to be careful.
+   The footer structure in HTML is:
+   footer > container > footer-content (grid)
+   
+   If .container here is display: grid, and footer-content is inside it, it should be fine.
+*/
+
+.footer .container {
+    max-width: 1200px; /* Match main site */
+    display: block; /* Reset to block for footer's internal layout if needed, or keep grid?
+                       The main site uses display:block (default) for container usually, but here it is grid.
+                       Let's check styles.css: .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; } (Block)
+                       Here .container { display: grid; ... }
+                       We should probably reset it for the footer to avoid issues.
+                    */
+    display: block;
+    padding: 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    height: 55px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.footer-slogan {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    background: var(--gold);
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    border-bottom: none; /* Override previous footer a styles */
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+    border-color: transparent;
+}
+
+.footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.footer-dev a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-dev a:hover {
+    color: var(--aqua);
+}
+
+@media (max-width: 968px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-col.footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
 }

@@ -5,11 +5,10 @@ const dadosVoigt = {
   equipe: [
     {
       id: 1,
-      nome: "Nathalia Voigt",
-      apelido: "Nathy",
-      cargo: "Diretora Comercial",
+      nome: "Nathalia Bins Voigt",
+      cargo: "COO - Diretora Comercial",
       foto: "/assets/equipe/nathalia-bins-voigt.jpeg",
-      descricao: "Especialista em desenvolvimento de negócios e relacionamento com clientes. Responsável pela estratégia comercial e expansão da consultoria.",
+      descricao: "Especialista em Direito Tributário, desenvolvimento de negócios e relacionamento com clientes. Lidera a equipe comercial, com mais de 8 anos de experiência jurídica.",
       email: "nathaliavoigt@voigtconsultoria.com.br",
       whatsapp: "5551996353096",
       linkedin: "https://www.linkedin.com/company/voigt-consultoria-empresarial/",
@@ -18,9 +17,9 @@ const dadosVoigt = {
     {
       id: 2,
       nome: "Leandro Souza Mendonça",
-      cargo: "Diretor Operacional",
+      cargo: "CLO - Diretor Jurídico",
       foto: "/assets/equipe/leandro-souza-mendonca.jpeg",
-      descricao: "Advogado, bacharel em Direito e especialista em Advocacia Cível, Prática Trabalhista e Previdenciária. Possui mais de 10 anos de experiência no Direito Bancário, atuando na defesa de grandes instituições financeiras. Reconhecido pela postura estratégica e técnica, entrega soluções eficientes e seguras para seus clientes.",
+      descricao: "Especialista em Direito Bancário e área civel, com mais de 15 anos de experiência. Lidera a equipe técnica e garante a excelência na entrega dos serviços.",
       email: "leandromendonca@voigtconsultoria.com.br",
       whatsapp: "5551984538987",
       linkedin: "https://www.linkedin.com/company/voigt-consultoria-empresarial/",
@@ -29,10 +28,10 @@ const dadosVoigt = {
     {
       id: 3,
       nome: "Lucas Silva",
-      cargo: "Diretor Administrativo e Processos",
+      cargo: "CEO - Diretor Administrativo e Operacional",
       foto: "/assets/equipe/lucas-silva.jpeg",
-      descricao: "Responsável pela gestão administrativa e otimização de processos internos. Garante eficiência operacional e qualidade no atendimento.",
-      email: "lucassilva@voigtconsultoria.com.br",
+      descricao: "Responsável pela gestão do escritório e otimização dos processos internos. Garante eficiência operacional e comercial.",
+      email: "lucas.silva@voigtconsultoria.com.br",
       whatsapp: "5551983544766",
       linkedin: "https://www.linkedin.com/company/voigt-consultoria-empresarial/",
       instagram: "https://www.instagram.com/voigt.consultoriaempresarial/"

@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Carregar cabeçalho e, em seguida, inicializar o menu de navegação
     loadComponent("header-placeholder", "/templates/_header.html", initializeMobileNav);
-    loadComponent("footer-placeholder", "/templates/_footer.html");
 });
 
 function initializeMobileNav() {
