@@ -3,9 +3,15 @@
 .env.local
 .env.*.local
 
-# Arquivo de configuração gerado (opcional - pode ser commitado se necessário)
-# Descomente a linha abaixo se não quiser commitar o config.js gerado
-# sdk/config.js
+# Arquivo de configuração gerado - NÃO commitar credenciais
+sdk/config.js
+
+# Credenciais e informações sensíveis
+credenciais/
+*.secret
+*.key
+*credentials*
+*acess*
 
 # Logs
 *.log
