@@ -2,6 +2,21 @@
 
 Este documento explica como configurar as credenciais do Supabase de forma segura para desenvolvimento local e produção no Netlify.
 
+## ⚠️ ALERTA CRÍTICO DE SEGURANÇA
+
+**ATENÇÃO:** Se você encontrou este projeto após um commit anterior que continha credenciais expostas:
+
+1. **REGENERE IMEDIATAMENTE** as seguintes credenciais no painel do Supabase:
+   - `database_password` (senha do banco de dados)
+   - `service_role_secret` (chave de serviço - acesso total)
+   - `legacy_jwt_secret` (se ainda estiver em uso)
+
+2. **Revise o histórico do Git** - As credenciais podem ainda estar visíveis em commits antigos
+
+3. **Nunca commite** arquivos na pasta `credenciais/` ou `sdk/config.js` com dados reais
+
+**Status Atual:** ✅ Arquivos sensíveis foram removidos do Git e adicionados ao `.gitignore`
+
 ## 📋 Pré-requisitos
 
 - Node.js instalado (para o script de build)
