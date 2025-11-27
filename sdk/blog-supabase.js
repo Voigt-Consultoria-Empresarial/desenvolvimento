@@ -15,15 +15,12 @@ if (!window.SUPABASE_CONFIG.url || !window.SUPABASE_CONFIG.anonKey) {
     throw new Error('Credenciais do Supabase não configuradas corretamente.');
 }
 
-const SUPABASE_URL = window.SUPABASE_CONFIG.url;
-const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG.anonKey;
-
-// Inicializa o cliente Supabase
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Usa a função global getSupabaseClient definida em config.js
 
 // 2. Funo para Buscar Posts do Blog com Categoria
 async function getBlogPosts() {
     try {
+        const supabase = window.getSupabaseClient();
         let { data: posts, error } = await supabase
             .from('blog_posts')
             // Seleciona todas as colunas de blog_posts e o nome da categoria da tabela relacionada
@@ -44,6 +41,7 @@ async function getBlogPosts() {
 // 4. Função para Buscar um ÚNICO Post pelo SLUG com Categoria
 async function getBlogPostBySlug(slug) {
     try {
+        const supabase = window.getSupabaseClient();
         let { data, error } = await supabase
             .from('blog_posts')
             // Seleciona todas as colunas de blog_posts e o nome da categoria da tabela relacionada

@@ -1019,6 +1019,40 @@ section {
     color: var(--gray);
 }
 
+.form-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--light-gray);
+    border-radius: 8px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.form-error.active {
+    display: flex;
+}
+
+.form-error svg {
+    color: #dc3545;
+    margin-bottom: 1rem;
+}
+
+.form-error h3 {
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+}
+
+.form-error p {
+    color: var(--gray);
+}
+
 /* Responsive */
 @media (max-width: 968px) {
     .contact-wrapper {

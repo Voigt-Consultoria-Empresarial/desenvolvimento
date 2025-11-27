@@ -84,19 +84,39 @@ htmlFiles.forEach(htmlPath => {
     if (fs.existsSync(htmlPath)) {
         const htmlContent = fs.readFileSync(htmlPath, 'utf8');
         const fileName = path.basename(htmlPath);
+        const dirName = path.dirname(htmlPath).split(path.sep).pop();
+        const displayName = dirName !== 'desenvolvimento' ? `${dirName}/${fileName}` : fileName;
         
-        // Verifica se config.js está antes de blog-supabase.js
+        // Verifica ordem dos scripts
+        const supabaseCDNIndex = htmlContent.indexOf('@supabase/supabase-js');
         const configIndex = htmlContent.indexOf('config.js');
         const blogSupabaseIndex = htmlContent.indexOf('blog-supabase.js');
+        const contactSupabaseIndex = htmlContent.indexOf('contact-supabase.js');
         
+        let fileIssues = [];
+        
+        // Verifica se config.js existe
         if (configIndex === -1) {
-            htmlIssues.push(`${fileName}: config.js não encontrado`);
-        } else if (blogSupabaseIndex === -1) {
-            htmlIssues.push(`${fileName}: blog-supabase.js não encontrado`);
-        } else if (configIndex > blogSupabaseIndex) {
-            htmlIssues.push(`${fileName}: config.js deve vir ANTES de blog-supabase.js`);
+            fileIssues.push('config.js não encontrado');
+        }
+        
+        // Verifica ordem: CDN -> config.js -> blog-supabase.js -> contact-supabase.js
+        if (configIndex !== -1 && blogSupabaseIndex !== -1 && configIndex > blogSupabaseIndex) {
+            fileIssues.push('config.js deve vir ANTES de blog-supabase.js');
+        }
+        
+        if (configIndex !== -1 && contactSupabaseIndex !== -1 && configIndex > contactSupabaseIndex) {
+            fileIssues.push('config.js deve vir ANTES de contact-supabase.js');
+        }
+        
+        if (blogSupabaseIndex !== -1 && contactSupabaseIndex !== -1 && blogSupabaseIndex > contactSupabaseIndex) {
+            fileIssues.push('blog-supabase.js deve vir ANTES de contact-supabase.js');
+        }
+        
+        if (fileIssues.length === 0) {
+            console.log(`✅ ${displayName}: Scripts na ordem correta`);
         } else {
-            console.log(`✅ ${fileName}: Scripts na ordem correta`);
+            fileIssues.forEach(issue => htmlIssues.push(`${displayName}: ${issue}`));
         }
     }
 });
@@ -115,6 +135,44 @@ if (fs.existsSync(envPath)) {
 } else {
     console.log('ℹ️  Arquivo .env não encontrado (opcional para desenvolvimento)');
 }
+
+// Verifica arquivos SDK
+console.log('\n🔧 Verificando arquivos SDK...');
+const sdkFiles = [
+    { name: 'blog-supabase.js', path: path.join(__dirname, '..', 'sdk', 'blog-supabase.js') },
+    { name: 'contact-supabase.js', path: path.join(__dirname, '..', 'sdk', 'contact-supabase.js') }
+];
+
+let sdkIssues = [];
+
+sdkFiles.forEach(file => {
+    if (fs.existsSync(file.path)) {
+        const content = fs.readFileSync(file.path, 'utf8');
+        
+        // Verifica se usa getSupabaseClient (padrão correto)
+        if (content.includes('getSupabaseClient()')) {
+            console.log(`✅ ${file.name}: Usando getSupabaseClient() corretamente`);
+        } else {
+            sdkIssues.push(`${file.name}: Não está usando getSupabaseClient()`);
+        }
+        
+        // Verifica se valida SUPABASE_CONFIG
+        if (content.includes('SUPABASE_CONFIG')) {
+            console.log(`✅ ${file.name}: Valida SUPABASE_CONFIG`);
+        } else {
+            sdkIssues.push(`${file.name}: Não valida SUPABASE_CONFIG`);
+        }
+        
+        // Verifica se NÃO tem credenciais hardcoded
+        if (content.includes('https://') && content.includes('.supabase.co') && !content.includes('SUPABASE_CONFIG')) {
+            sdkIssues.push(`${file.name}: Possível credencial hardcoded encontrada`);
+        } else {
+            console.log(`✅ ${file.name}: Sem credenciais hardcoded`);
+        }
+    } else {
+        sdkIssues.push(`${file.name}: Arquivo não encontrado`);
+    }
+});
 
 // Resumo final
 console.log('\n' + '='.repeat(50));
@@ -135,6 +193,13 @@ if (htmlIssues.length === 0) {
     htmlIssues.forEach(issue => console.log(`   - ${issue}`));
 }
 
+if (sdkIssues.length === 0) {
+    console.log('✅ Arquivos SDK: OK');
+} else {
+    console.log('❌ Arquivos SDK: PROBLEMAS ENCONTRADOS');
+    sdkIssues.forEach(issue => console.log(`   - ${issue}`));
+}
+
 console.log('\n💡 Próximos passos:');
 if (!configExists || !configValid) {
     console.log('   1. Crie um arquivo .env com suas credenciais');
@@ -143,8 +208,10 @@ if (!configExists || !configValid) {
 if (htmlIssues.length > 0) {
     console.log('   1. Corrija a ordem dos scripts nos arquivos HTML');
 }
-if (configExists && configValid && htmlIssues.length === 0) {
+if (configExists && configValid && htmlIssues.length === 0 && sdkIssues.length === 0) {
     console.log('   ✅ Tudo configurado! Você pode testar o site agora.');
+} else if (sdkIssues.length > 0) {
+    console.log('   1. Corrija os problemas nos arquivos SDK');
 }
 
 console.log('');

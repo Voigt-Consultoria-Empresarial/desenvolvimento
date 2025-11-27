@@ -84,6 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
+        
+        // Formatação automática do telefone
+        const telefoneInput = document.getElementById('telefone');
+        if (telefoneInput) {
+            telefoneInput.addEventListener('input', formatPhoneNumber);
+            telefoneInput.addEventListener('keydown', handlePhoneKeydown);
+        }
     }
 });
 
@@ -266,29 +273,140 @@ if (statsSection) {
     statsObserver.observe(statsSection);
 }
 
+// Função para formatar telefone automaticamente
+function formatPhoneNumber(e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    
+    // Limita a 11 dígitos (DDD + 9 dígitos para celular)
+    if (value.length > 11) {
+        value = value.slice(0, 11);
+    }
+    
+    // Formata baseado no tamanho
+    let formattedValue = '';
+    if (value.length === 0) {
+        formattedValue = '';
+    } else if (value.length <= 2) {
+        // Apenas DDD
+        formattedValue = `(${value}`;
+    } else if (value.length <= 7) {
+        // DDD + início do número (até 5 dígitos após DDD)
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    } else if (value.length <= 10) {
+        // Telefone fixo completo: (XX) XXXX-XXXX
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+    } else {
+        // Celular completo: (XX) XXXXX-XXXX
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+    }
+    
+    e.target.value = formattedValue;
+}
+
+// Função para lidar com teclas especiais no campo telefone
+function handlePhoneKeydown(e) {
+    // Permite backspace, delete, tab, escape, enter
+    if ([8, 9, 27, 13, 46].indexOf(e.keyCode) !== -1 ||
+        // Permite Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+        (e.keyCode === 65 && e.ctrlKey === true) ||
+        (e.keyCode === 67 && e.ctrlKey === true) ||
+        (e.keyCode === 86 && e.ctrlKey === true) ||
+        (e.keyCode === 88 && e.ctrlKey === true) ||
+        // Permite home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+        return;
+    }
+    // Bloqueia se não for um número
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+}
+
 // Handle form submission
-function handleFormSubmit(e) {
+async function handleFormSubmit(e) {
     e.preventDefault();
     
-    // Simulate form submission (in production, this would send to a backend)
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    
-    console.log('Form submitted:', data);
-    
-    // Show success message
+    const form = e.target;
+    const submitButton = form.querySelector('button[type="submit"]');
     const formSuccess = document.getElementById('formSuccess');
-    const form = document.getElementById('contactForm');
+    const formError = document.getElementById('formError');
+    const errorMessage = document.getElementById('errorMessage');
     
-    if (formSuccess && form) {
-        form.style.display = 'none';
-        formSuccess.classList.add('active');
+    // Esconde mensagens anteriores
+    if (formSuccess) formSuccess.classList.remove('active');
+    if (formError) formError.classList.remove('active');
+    
+    // Desabilita o botão durante o envio
+    if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+    }
+    
+    try {
+        // Coleta os dados do formulário
+        // Remove formatação do telefone antes de enviar (apenas números)
+        const telefoneValue = document.getElementById('telefone').value.replace(/\D/g, '');
         
-        // Reset form and hide success message after 5 seconds
-        setTimeout(() => {
-            form.style.display = 'block';
-            formSuccess.classList.remove('active');
-            form.reset();
-        }, 5000);
+        const formData = {
+            nome: document.getElementById('nome').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            telefone: telefoneValue,
+            empresa: document.getElementById('empresa').value.trim() || null,
+            assunto: document.getElementById('assunto').value.trim(),
+            mensagem: document.getElementById('mensagem').value.trim()
+        };
+        
+        // Verifica se a API está disponível
+        if (!window.contactAPI || !window.contactAPI.submitContactForm) {
+            throw new Error('API de contato não está disponível. Verifique se contact-supabase.js está carregado.');
+        }
+        
+        // Envia os dados via SDK
+        await window.contactAPI.submitContactForm(formData);
+        
+        // Sucesso: mostra mensagem de sucesso
+        if (formSuccess && form) {
+            form.style.display = 'none';
+            formSuccess.classList.add('active');
+            
+            // Reset form and hide success message after 5 seconds
+            setTimeout(() => {
+                form.style.display = 'block';
+                formSuccess.classList.remove('active');
+                form.reset();
+            }, 5000);
+        }
+    } catch (error) {
+        console.error('Erro ao enviar formulário:', error);
+        
+        // Mostra mensagem de erro da aplicação
+        if (formError && form && errorMessage) {
+            // Mensagem personalizada baseada no tipo de erro
+            let errorText = 'Por favor, tente novamente ou entre em contato diretamente pelo telefone/WhatsApp.';
+            
+            if (error.message && error.message.includes('API de contato')) {
+                errorText = 'Erro de configuração. Por favor, recarregue a página e tente novamente.';
+            } else if (error.message && error.message.includes('Campos obrigatórios')) {
+                errorText = 'Por favor, preencha todos os campos obrigatórios.';
+            } else if (error.message && error.message.includes('network') || error.message && error.message.includes('fetch')) {
+                errorText = 'Erro de conexão. Verifique sua internet e tente novamente.';
+            }
+            
+            errorMessage.textContent = errorText;
+            form.style.display = 'none';
+            formError.classList.add('active');
+            
+            // Esconde mensagem de erro e mostra formulário novamente após 8 segundos
+            setTimeout(() => {
+                form.style.display = 'block';
+                formError.classList.remove('active');
+            }, 8000);
+        }
+        
+        // Reabilita o botão
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar mensagem';
+        }
     }
 }
