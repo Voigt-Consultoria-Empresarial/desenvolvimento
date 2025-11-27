@@ -8,7 +8,7 @@ const dadosVoigt = {
       nome: "Nathalia Bins Voigt",
       cargo: "COO - Diretora Comercial",
       foto: "/assets/equipe/nathalia-bins-voigt.jpeg",
-      descricao: "Especialista em Direito Tributário, desenvolvimento de negócios e relacionamento com clientes. Lidera a equipe comercial, com mais de 8 anos de experiência jurídica.",
+      descricao: "Especialista em Direito Tributário, desenvolvimento de negócios e relacionamento com clientes. Lidera a equipe comercial, impulsiona resultados e fortalece parcerias.",
       email: "nathaliavoigt@voigtconsultoria.com.br",
       whatsapp: "5551996353096",
       linkedin: "https://www.linkedin.com/company/voigt-consultoria-empresarial/",

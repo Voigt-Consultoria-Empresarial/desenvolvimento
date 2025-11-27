@@ -1,0 +1,19 @@
+# Configuração do Netlify para deploy seguro
+# 
+# Este arquivo configura o processo de build no Netlify.
+# O script de build gerará automaticamente o arquivo sdk/config.js
+# a partir das variáveis de ambiente configuradas no painel do Netlify.
+
+[build]
+  # Comando de build que gera o config.js a partir das variáveis de ambiente
+  command = "node scripts/build-config.js"
+  
+  # Diretório de publicação (ajuste conforme necessário)
+  publish = "."
+
+# Configurações de redirecionamento (opcional)
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
+

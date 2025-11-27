@@ -1,0 +1,36 @@
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivo de configuração gerado (opcional - pode ser commitado se necessário)
+# Descomente a linha abaixo se não quiser commitar o config.js gerado
+# sdk/config.js
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependências
+node_modules/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build
+dist/
+build/
+
+# Arquivos temporários
+*.tmp
+*.temp

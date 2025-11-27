@@ -1,0 +1,17 @@
+# Variáveis de Ambiente para Supabase
+# 
+# INSTRUÇÕES:
+# 1. Copie este arquivo e renomeie para .env
+# 2. Preencha com suas credenciais reais do Supabase
+# 3. NUNCA commite o arquivo .env no Git
+
+VITE_SUPABASE_URL=https://seu-projeto.supabase.co
+VITE_SUPABASE_ANON_KEY=sua-chave-anon-aqui
+
+# Exemplo de como obter essas credenciais:
+# 1. Acesse o painel do Supabase: https://app.supabase.com
+# 2. Selecione seu projeto
+# 3. Vá em Settings > API
+# 4. Copie a "Project URL" para VITE_SUPABASE_URL
+# 5. Copie a "anon public" key para VITE_SUPABASE_ANON_KEY
+

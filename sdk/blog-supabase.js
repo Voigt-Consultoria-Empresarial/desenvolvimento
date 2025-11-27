@@ -1,9 +1,24 @@
-// sdk/blog.js
+// sdk/blog-supabase.js
 
-// 1. Configurao do Cliente Supabase
-const SUPABASE_URL = 'https://yihgvuqrdxkeyaitcyie.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpaGd2dXFyZHhrZXlhaXRjeWllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0ODc4NjUsImV4cCI6MjA3NzA2Mzg2NX0.zLRR9tD7depXglKIk0eEG7DfITK3hLLqMbWhctZ3X0U';
+// 1. Configuração do Cliente Supabase
+// As credenciais são carregadas do arquivo config.js que deve ser incluído antes deste script
 
+// Verifica se a configuração foi carregada
+if (!window.SUPABASE_CONFIG) {
+    console.error('❌ Erro: SUPABASE_CONFIG não encontrado. Certifique-se de que config.js está sendo carregado antes deste script.');
+    throw new Error('SUPABASE_CONFIG não está disponível. Verifique se config.js está incluído no HTML.');
+}
+
+// Validação das credenciais
+if (!window.SUPABASE_CONFIG.url || !window.SUPABASE_CONFIG.anonKey) {
+    console.error('❌ Erro: Credenciais do Supabase incompletas em SUPABASE_CONFIG.');
+    throw new Error('Credenciais do Supabase não configuradas corretamente.');
+}
+
+const SUPABASE_URL = window.SUPABASE_CONFIG.url;
+const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG.anonKey;
+
+// Inicializa o cliente Supabase
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 2. Funo para Buscar Posts do Blog com Categoria
